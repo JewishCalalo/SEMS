@@ -10,7 +10,7 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 COPY . /var/www/html
 WORKDIR /var/www/html
 
-# Install Laravel dependencies
+# Install Composer and Laravel dependencies
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     composer install --no-dev --optimize-autoloader
@@ -18,8 +18,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 # Point Apache to Laravel's public directory
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-RUN chown -R www-data:www-data /var/www/html
-
 RUN chmod -R 775 storage bootstrap/cache public
+RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
