@@ -1,12 +1,16 @@
 FROM php:8.2-apache
 
+# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     libzip-dev unzip git curl sqlite3 libsqlite3-dev zlib1g-dev \
+    php-cli php-mbstring php-xml php-curl php-zip php-openssl \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip pdo pdo_sqlite
 
+# Suppress Apache hostname warning
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# Copy Laravel project files
 COPY . /var/www/html
 WORKDIR /var/www/html
 
@@ -18,7 +22,8 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 # Point Apache to Laravel's public directory
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-RUN chmod -R 775 storage bootstrap/cache public
-RUN chown -R www-data:www-data /var/www/html
+# Set permissions for writable directories
+RUN chmod -R 775 storage bootstrap/cache public && \
+    chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
