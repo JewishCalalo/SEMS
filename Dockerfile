@@ -6,18 +6,23 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip pdo pdo_sqlite
 
-# Copy Laravel project files
-COPY . /app
+# Set working directory
 WORKDIR /app
 
-# Install Composer and Laravel dependencies
+# Copy Laravel project files
+COPY . .
+
+# Install Composer globally and Laravel dependencies
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     composer install --no-dev --optimize-autoloader
 
-# Copy entrypoint script
+# Copy and configure entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+# Set entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
 
+# Expose port for Laravel's built-in server
 EXPOSE 80
