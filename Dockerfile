@@ -20,4 +20,6 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available
 
 RUN chown -R www-data:www-data /var/www/html
 
+RUN chmod -R 775 storage bootstrap/cache public
+
 EXPOSE 80
