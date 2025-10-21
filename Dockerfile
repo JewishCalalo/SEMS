@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip pdo pdo_sqlite
 
+# Suppress Apache hostname warning
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
 # Copy project files
 COPY . /var/www/html
 WORKDIR /var/www/html
