@@ -6,6 +6,10 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip pdo pdo_sqlite
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 # Suppress Apache hostname warning
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
