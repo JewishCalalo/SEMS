@@ -2,7 +2,7 @@ FROM php:8.2-apache
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    libzip-dev unzip git curl sqlite3 zlib1g-dev \
+    libzip-dev unzip git curl sqlite3 libsqlite3-dev zlib1g-dev \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip pdo pdo_sqlite
 
