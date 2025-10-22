@@ -17,12 +17,12 @@ export default defineConfig({
         'resources/js/utils/action-handler.js'
       ],
       refresh: true,
-      buildDirectory: 'vite', // ✅ Laravel 11 expects manifest here
+      buildDirectory: 'vite', // ✅ Laravel 12 expects this
     }),
   ],
   build: {
     manifest: true,
-    outDir: 'public/vite', // ✅ Laravel 11 default path
+    outDir: 'public/vite', // ✅ Matches Laravel's default lookup
     rollupOptions: {
       output: {
         entryFileNames: 'assets/[name]-[hash].js',
@@ -31,5 +31,5 @@ export default defineConfig({
       },
     },
   },
-  base: '/vite/', // ✅ Laravel 11 default asset base
+  base: '/vite/', // ✅ Ensures correct asset URLs
 });
