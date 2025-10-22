@@ -4,8 +4,7 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-            input: 
-            [
+            input: [
                 'resources/css/app.css',
                 'resources/css/components/buttons.css',
                 'resources/css/modules/auth.css',
@@ -20,4 +19,9 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        manifest: true,
+        outDir: 'public/build',
+    },
+    base: '/build/', 
 });
