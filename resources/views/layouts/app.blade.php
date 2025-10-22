@@ -19,7 +19,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/css/sweetalert2-custom.css', 'resources/js/app.js', 'resources/js/components/sweetalert2-utils.js', 'resources/js/utils/action-handler.js'])
+        @vite(['resources/css/app.css', 'resources/css/sweetalert2-custom.css', 'resources/js/app.js', 'resources/js/utils/action-handler.js'])
     </head>
     <body class="font-sans antialiased" style="background-image: url('{{ asset('images/Background.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
         <div class="min-h-screen bg-white/500">
