@@ -14,15 +14,16 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
     @vite([
-    'resources/js/app.js',
-    'resources/js/components/searchFilter.js',
-    'resources/js/components/sweetalert2-utils.js',
-    'resources/css/app.css',
-    'resources/css/components/buttons.css',
-    'resources/css/modules/auth.css',
-    'resources/css/modules/welcome.css',
-    'resources/css/sweetalert2-custom.css'
-])
+        'resources/js/app.js',
+        'resources/js/components/welcome.js',
+        'resources/js/components/searchFilter.js',
+        'resources/js/components/sweetalert2-utils.js',
+        'resources/css/app.css', 
+        'resources/css/components/buttons.css',
+        'resources/css/modules/auth.css',
+        'resources/css/modules/welcome.css',
+        'resources/css/sweetalert2-custom.css'
+    ])
     
     <script>
         // Backup toggle functionality

@@ -18,7 +18,6 @@ export default defineConfig({
                 'resources/js/utils/action-handler.js'
             ],
             refresh: true,
-            buildDirectory: 'vite',
         }),
     ],
 });
