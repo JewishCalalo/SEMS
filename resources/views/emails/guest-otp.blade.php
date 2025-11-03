@@ -20,7 +20,7 @@
 <body>
     <div class="wrap">
         <div class="header">
-            <img class="brand" src="{{ $message->embed(public_path('images/ub-logo.png')) }}" alt="University of Baguio">
+            {{-- <img class="brand" src="{{ $message->embed(public_path('images/ub-logo.png')) }}" alt="University of Baguio"> --}}
             <h1 class="title">Your Verification Code</h1>
         </div>
 
