@@ -462,6 +462,10 @@ class ReservationController extends Controller
                 ]);
 
                 // Generate and send 6-digit email verification code for guests
+                Log::info('Checking if guest email should be sent', [
+                    'user_id' => $reservation->user_id,
+                    'email' => $reservation->email,
+                ]);
                 if (!$reservation->user_id && $reservation->email) {
                     try {
                         $code = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
