@@ -467,24 +467,35 @@ class ReservationController extends Controller
                     'email' => $reservation->email,
                 ]);
                 if (!$reservation->user_id && $reservation->email) {
-                    try {
-                        $code = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-                        // Persist to temporary cache keyed by reservation id
-                        cache()->put('reservation_otp_'.$reservation->id, [
-                            'hash' => hash('sha256', $code),
-                            'expires_at' => now()->addMinutes(15)
-                        ], 900);
-                        \Mail::send('emails.guest-otp', [
-                            'code' => $code,
-                            'name' => $reservation->name,
-                            'expiresIn' => 15,
-                        ], function($m) use ($reservation) {
-                            $m->to($reservation->email)->subject('SEMS Reservation Verification Code');
-                        });
-                    } catch (\Exception $e) {
-                        \Log::error('Failed to send verification code', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
-                    }
-                }
+    Log::info('Preparing to send email to guest', [
+        'email' => $reservation->email,
+        'name' => $reservation->name,
+    ]);
+
+    try {
+        $code = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+
+        cache()->put('reservation_otp_'.$reservation->id, [
+            'hash' => hash('sha256', $code),
+            'expires_at' => now()->addMinutes(15)
+        ], 900);
+
+        \Mail::send('emails.guest-otp', [
+            'code' => $code,
+            'name' => $reservation->name,
+            'expiresIn' => 15,
+        ], function($m) use ($reservation) {
+            $m->to($reservation->email)->subject('SEMS Reservation Verification Code');
+        });
+
+        Log::info('Email sent successfully to guest');
+    } catch (\Exception $e) {
+        Log::error('Failed to send email', [
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+        ]);
+    }
+}
 
                 // Check if this is an AJAX request
                 if ($request->expectsJson()) {
