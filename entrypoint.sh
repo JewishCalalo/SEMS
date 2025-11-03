@@ -19,4 +19,4 @@ fi
 php artisan migrate --force
 
 # Start Laravel's built-in server
-php -S 0.0.0.0:80 -t public
+php -S 0.0.0.0:10000 -t public
