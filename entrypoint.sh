@@ -15,8 +15,10 @@ if [ ! -f "$DB_PATH" ]; then
     chmod 775 "$DB_PATH"
 fi
 
-# Run migrations
+# Run migrations and seeders
 php artisan migrate --force
+php artisan db:seed --force
 
-# Start Laravel's built-in server
+# Start Laravel's built-in server on Render's required port
+echo "Starting Laravel server on port 10000..."
 php -S 0.0.0.0:10000 -t public
