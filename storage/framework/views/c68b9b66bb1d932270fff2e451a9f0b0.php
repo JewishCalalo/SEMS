@@ -20,7 +20,7 @@
 <body>
     <div class="wrap">
         <div class="header">
-            <img class="brand" src="<?php echo e($message->embed(public_path('images/ub-logo.png'))); ?>" alt="University of Baguio">
+            
             <h1 class="title">Your Verification Code</h1>
         </div>
 
