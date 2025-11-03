@@ -478,7 +478,7 @@ class ReservationController extends Controller
                             $m->to($reservation->email)->subject('SEMS Reservation Verification Code');
                         });
                     } catch (\Exception $e) {
-                        \Log::error('Failed to send verification code', ['error' => $e->getMessage()]);
+                        \Log::error('Failed to send verification code', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
                     }
                 }
 
@@ -665,7 +665,7 @@ class ReservationController extends Controller
                 $m->to($data['email'])->subject('SEMS Reservation Verification Code');
             });
         } catch (\Exception $e) {
-            \Log::error('Failed to send verification code', ['error' => $e->getMessage()]);
+            \Log::error('Failed to send verification code', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
         }
 
         if ($request->expectsJson()) {
@@ -1244,7 +1244,7 @@ class ReservationController extends Controller
                 });
             }
         } catch (\Exception $e) {
-            \Log::error('Failed to resend verification code', ['error' => $e->getMessage()]);
+            \Log::error('Failed to resend verification code', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
             return response()->json(['success' => false, 'message' => 'Failed to send code. Try again later.'], 500);
         }
 
